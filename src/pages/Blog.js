@@ -2,14 +2,18 @@ import React from 'react';
 import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
 
-const blog = () => {
-    const [content, setContent] = useState('');
+const Blog = () => {
+    const [content, setContent] = useState("");
+    const [error, setError] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (content.length < 140) {
-            alert('Votre message est trop court');
+            setError(true);
+        } else {
+            setError(false);
+            
         }
     };
 
@@ -21,9 +25,11 @@ const blog = () => {
 
             <form onSubmit={(e) => handleSubmit(e)}>
                 <input type="text"  placeholder="Nom" />
-                <textarea   
+                <textarea  
+                style={{border: error ? "1px solid red" : "1px solid #61dafb"}} 
                 placeholder='Message'
                 onChangeCapture={(e) => setContent(e.target.value)}></textarea>
+              {error && <p>Veuillez saisir un minimum de 140 caractères</p>}  
                 <input type="submit" value="Envoyer"/>
             </form>
             <ul></ul>
@@ -31,4 +37,4 @@ const blog = () => {
     );
 };
 
-export default blog;
+export default Blog;
