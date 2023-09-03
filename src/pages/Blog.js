@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
+import axios from 'axios';
 
 const Blog = () => {
     const [content, setContent] = useState("");
     const [error, setError] = useState(false);
 
+    useEffect(() => {
+        const getData = () => {
+            axios.get("http://localhost:3004/articles").then((res) => console.log(res));
+        }
+    }, []);
     const handleSubmit = (e) => {
         e.preventDefault();
 
