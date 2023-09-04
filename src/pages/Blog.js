@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
 import axios from 'axios';
+import Article from '../components/Article';
 
 
 const Blog = () => {
@@ -12,7 +13,7 @@ const Blog = () => {
 
     const getData = () => {
         axios
-            .get("http://localost:3004/articles")
+            .get("http://localhost:3004/articles")
             .then((res) => setBlogData(res.data))
         };
 
@@ -24,8 +25,8 @@ const Blog = () => {
         if (content.length < 140) {
         setError(true);
         } else {
-        axios.
-        post("http://localhost:3004/articles", {
+        axios
+        .post("http://localhost:3004/articles", {
             author,
             content,
             date: Date.now(),
