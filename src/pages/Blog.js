@@ -14,7 +14,7 @@ const Blog = () => {
     const getData = () => {
         axios
             .get("http://localhost:3004/articles")
-            .then((res) => setBlogData(res.data))
+            .then((res) => setBlogData(res.data));
         };
 
     useEffect(() => getData(), []);
@@ -25,20 +25,19 @@ const Blog = () => {
         if (content.length < 140) {
         setError(true);
         } else {
-        axios
-        .post("http://localhost:3004/articles", {
-            author,
-            content,
-            date: Date.now(),
-        })
-        .then(() => {
-         setError(false);
-        setAuthor('');
-        setContent('');
-        getData();
-        });
+             axios.post("http://localhost:3004/articles", {
+                author,
+                content,
+                date: Date.now(),
+            });
+        
+             setError(false);
+            setAuthor('');
+            setContent('');
+            getData();
+        }
        
-    }
+    };
 
     return (
         <div className="blog-container">
@@ -63,7 +62,8 @@ const Blog = () => {
                 {blogData
                 .sort((a, b) => b.date - a.date)
                 .map((article) => (
-                <Article key={article.id} article={article} />))}
+                <Article key={article.id} article={article} />
+                ))}
             </ul>
         </div>
     );
